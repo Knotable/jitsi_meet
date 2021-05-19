@@ -40,7 +40,7 @@ class JitsiViewController: UIViewController {
 
         //print("VIEW DID LOAD")
         self.view.backgroundColor = .clear
-        self.view.userInteractionEnabled = false;
+        self.view.isUserInteractionEnabled = false;
         super.viewDidLoad()
     }
 
