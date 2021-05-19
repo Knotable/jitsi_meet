@@ -103,8 +103,6 @@ public class SwiftJitsiMeetPlugin: NSObject, FlutterPlugin, FlutterStreamHandler
             navigationController.modalPresentationStyle = .overCurrentContext
             navigationController.navigationBar.barTintColor = UIColor.black
             self.uiVC.present(navigationController, animated: true)
-            self.uiVC.view.isUserInteractionEnabled = false;
-
             result(nil)
 
         }else if (call.method == "closeMeeting") {
