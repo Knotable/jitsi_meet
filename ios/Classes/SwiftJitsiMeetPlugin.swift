@@ -100,7 +100,7 @@ public class SwiftJitsiMeetPlugin: NSObject, FlutterPlugin, FlutterStreamHandler
 
             let navigationController = UINavigationController(rootViewController: (self.jitsiViewController)!)
             navigationController.setNavigationBarHidden(true, animated: false)
-            navigationController.modalPresentationStyle = .overCurrentContet
+            navigationController.modalPresentationStyle = .overCurrentContext
             navigationController.navigationBar.barTintColor = UIColor.black
             self.uiVC.present(navigationController, animated: true)
             result(nil)
