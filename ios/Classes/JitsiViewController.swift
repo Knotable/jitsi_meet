@@ -90,6 +90,10 @@ class JitsiViewController: UIViewController {
         // animate in
         jitsiMeetView.alpha = 0
         pipViewCoordinator?.show()
+
+        // fix touch into parent view on first start
+        pipViewCoordinator?.enterPictureInPicture()
+        pipViewCoordinator?.exitPictureInPicture()
     }
 
     func closeJitsiMeeting(){
