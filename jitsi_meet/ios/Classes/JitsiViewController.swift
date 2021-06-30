@@ -49,7 +49,8 @@ class JitsiViewController: UIViewController {
 
     override func viewWillTransition(to size: CGSize,
                                      with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
+        super.viewWillTransition(to: size, with: co
+        ordinator)
         let rect = CGRect(origin: CGPoint.zero, size: size)
         pipViewCoordinator?.resetBounds(bounds: rect)
     }
@@ -86,6 +87,7 @@ class JitsiViewController: UIViewController {
         // the view state and interactions
         pipViewCoordinator = PiPViewCoordinator(withView: jitsiMeetView)
         pipViewCoordinator?.configureAsStickyView(withParentView: view)
+        pipViewCoordinator?.delegate = self
 
         // animate in
         jitsiMeetView.alpha = 0
@@ -105,6 +107,14 @@ class JitsiViewController: UIViewController {
         jitsiMeetView = nil
         pipViewCoordinator = nil
         //self.dismiss(animated: true, completion: nil)
+    }
+
+    fileprivate func getUrl() -> String {
+        if let url = self.serverUrl?.absoluteString {
+            let fragment = self.roomName ??  ""
+            return url.last == "/" ? "\(url)\(fragment)" : "\(url)/\(fragment)"
+        }
+        return ""
     }
 }
 
@@ -143,16 +153,20 @@ extension JitsiViewController: JitsiMeetViewDelegate {
         //        print("CONFERENCE PIP IN")
         var mutatedData = data
         mutatedData?.updateValue("onPictureInPictureWillEnter", forKey: "event")
+        mutatedData?.updateValue(self.getUrl(), forKey: "url")
         self.eventSink?(mutatedData)
         DispatchQueue.main.async {
             self.pipViewCoordinator?.enterPictureInPicture()
         }
     }
+}
 
-    func exitPictureInPicture() {
+
+extension JitsiViewController: PiPViewCoordinatorDelegate {
+     func exitPictureInPicture() {
         //        print("CONFERENCE PIP OUT")
-        var mutatedData : [AnyHashable : Any]
-        mutatedData = ["event":"onPictureInPictureTerminated"]
+        let mutatedData : [String : String] =
+            [ "event": "onPictureInPictureTerminated", "url": self.getUrl() ]
         self.eventSink?(mutatedData)
     }
 }

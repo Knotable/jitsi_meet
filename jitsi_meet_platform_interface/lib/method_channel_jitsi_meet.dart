@@ -150,6 +150,14 @@ class MethodChannelJitsiMeet extends JitsiMeetPlatform {
           // Remove the listener from the map of _perMeetingListeners on terminate
           _perMeetingListeners.remove(listener);
           break;
+        case "onPictureInPictureWillEnter":
+          if (listener.onPictureInPictureWillEnter != null)
+            listener.onPictureInPictureWillEnter!(message);
+          break;
+        case "onPictureInPictureTerminated":
+          if (listener.onPictureInPictureTerminated != null)
+            listener.onPictureInPictureTerminated!(message);
+          break;
       }
     }
   }
