@@ -49,8 +49,7 @@ class JitsiViewController: UIViewController {
 
     override func viewWillTransition(to size: CGSize,
                                      with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: co
-        ordinator)
+        super.viewWillTransition(to: size, with: coordinator)
         let rect = CGRect(origin: CGPoint.zero, size: size)
         pipViewCoordinator?.resetBounds(bounds: rect)
     }
