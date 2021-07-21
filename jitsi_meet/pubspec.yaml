@@ -11,9 +11,15 @@ dependencies:
   flutter:
     sdk: flutter
   jitsi_meet_platform_interface:
-    path: ../jitsi_meet_platform_interface
+    git:
+      url: git://github.com/Knotable/jitsi_meet.git
+      path: jitsi_meet_platform_interface
+      ref: custom-from-4.0.0
   jitsi_meet_web_plugin:
-    path: ../jitsi_meet_web_plugin
+    git:
+      url: git://github.com/Knotable/jitsi_meet.git
+      path: jitsi_meet_web_plugin
+      ref: custom-from-4.0.0
 
 dev_dependencies:
   flutter_test:
