@@ -117,7 +117,7 @@ class JitsiViewController: UIViewController {
     }
 }
 
-extension JitsiViewController: JitsiMeetViewDelegate {
+extension JitsiViewController: JitsiMeetViewDelegate, PiPViewCoordinatorDelegate {
 
     func conferenceWillJoin(_ data: [AnyHashable : Any]!) {
         //        print("CONFERENCE WILL JOIN")
@@ -158,15 +158,13 @@ extension JitsiViewController: JitsiMeetViewDelegate {
             self.pipViewCoordinator?.enterPictureInPicture()
         }
     }
-}
 
-
-extension JitsiViewController: PiPViewCoordinatorDelegate {
-     func exitPictureInPicture() {
+    func exitPictureInPicture() {
         //        print("CONFERENCE PIP OUT")
         let mutatedData : [String : String] =
             [ "event": "onPictureInPictureTerminated", "url": self.getUrl() ]
         self.eventSink?(mutatedData)
     }
 }
+
 
